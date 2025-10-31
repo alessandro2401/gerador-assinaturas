@@ -317,6 +317,110 @@
                 grid-template-columns: 1fr;
             }
         }
+        
+        /* Estilos da Seção de Rodapés */
+        .rodapes-section {
+            max-width: 1400px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .rodapes-header {
+            padding: 40px 40px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .rodapes-header h2 {
+            font-size: 2em;
+            color: #00203f;
+            margin-bottom: 10px;
+        }
+        
+        .rodapes-header p {
+            font-size: 1.1em;
+            color: #666;
+        }
+        
+        .rodapes-content {
+            padding: 40px;
+        }
+        
+        .rodape-card {
+            margin-bottom: 30px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .rodape-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .rodape-card.mmb h3 {
+            color: #00203f;
+        }
+        
+        .rodape-card.alpha h3 {
+            color: #1E5BA8;
+        }
+        
+        .rodape-preview {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: block;
+        }
+        
+        .btn-rodape {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+            margin-top: 10px;
+        }
+        
+        .btn-rodape.mmb {
+            background: #00203f;
+        }
+        
+        .btn-rodape.mmb:hover {
+            background: #003366;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,32,63,0.3);
+        }
+        
+        .btn-rodape.alpha {
+            background: #1E5BA8;
+        }
+        
+        .btn-rodape.alpha:hover {
+            background: #2a6bb5;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30,91,168,0.3);
+        }
+        
+        .rodape-info {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #00203f;
+            font-size: 0.95em;
+            color: #555;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -473,6 +577,41 @@
             </div>
         </div>
     </div>
+
+    <!-- SEÇÃO DE RODAPÉS OFICIAIS -->
+    <div class="rodapes-section">
+        <div class="rodapes-header">
+            <h2>📋 Rodapés Oficiais</h2>
+            <p>Baixe os rodapés com os logos de todas as empresas do grupo</p>
+        </div>
+        
+        <div class="rodapes-content">
+            <!-- Rodapé GRUPO MMB -->
+            <div class="rodape-card mmb">
+                <h3>🔵 Rodapé GRUPO MMB</h3>
+                <img src="rodape_mmb.png" alt="Rodapé Oficial GRUPO MMB" class="rodape-preview">
+                <button class="btn-rodape mmb" onclick="downloadRodape('mmb')">
+                    📥 Baixar Rodapé GRUPO MMB
+                </button>
+            </div>
+            
+            <!-- Rodapé ALPHA PROTEÇÕES -->
+            <div class="rodape-card alpha">
+                <h3>🔵 Rodapé ALPHA PROTEÇÕES</h3>
+                <img src="rodape_alpha.png" alt="Rodapé Oficial ALPHA PROTEÇÕES" class="rodape-preview">
+                <button class="btn-rodape alpha" onclick="downloadRodape('alpha')">
+                    📥 Baixar Rodapé ALPHA PROTEÇÕES
+                </button>
+            </div>
+            
+            <!-- Informações sobre os rodapés -->
+            <div class="rodape-info">
+                <strong>ℹ️ Sobre os Rodapés:</strong><br>
+                Os rodapés oficiais contêm os logos de todas as empresas do grupo e podem ser usados em materiais de comunicação, apresentações, documentos e e-mails. <br>
+                <strong>Dimensões:</strong> 1000x90 pixels | <strong>Formato:</strong> PNG com fundo transparente
+            </div>
+        </div>
+    </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
@@ -598,6 +737,21 @@
                 console.error('Erro ao gerar PNG:', error);
                 alert('❌ Erro ao gerar a imagem. Tente novamente.');
             });
+        }
+        
+        function downloadRodape(company) {
+            const rodapeUrl = company === 'mmb' 
+                ? 'rodape_mmb.png'
+                : 'rodape_alpha.png';
+            const rodapeName = company === 'mmb'
+                ? 'rodape_oficial_grupo_mmb.png'
+                : 'rodape_oficial_alpha_protecoes.png';
+            
+            const link = document.createElement('a');
+            link.href = rodapeUrl;
+            link.download = rodapeName;
+            link.click();
+            alert('✅ Rodapé oficial baixado com sucesso!');
         }
         
         // Inicializar
