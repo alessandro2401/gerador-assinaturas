@@ -137,7 +137,7 @@
             background: white;
             border: 1px solid #e0e0e0;
             border-radius: 10px;
-            padding: 20px;
+            padding: 15px;
             margin-bottom: 20px;
             max-width: 650px;
         }
@@ -221,7 +221,7 @@
         
         .signature-slogan {
             font-size: 11px;
-            color: #333;
+            color: #999;
             font-style: italic;
             margin-top: 8px;
         }
@@ -512,9 +512,9 @@
             const isMMB = company === 'mmb';
             const color = isMMB ? '#6495ed' : '#1E5BA8';
             const nameColor = isMMB ? '#00203f' : '#1E5BA8';
-            const logoSrc = isMMB ? 'https://seu-dominio.com/logo-mmb.png' : 'https://seu-dominio.com/logo-alpha.png';
+            const logoSrc = isMMB ? 'https://assinaturas.administradoramutual.com.br/LOGO_MMB.png' : 'https://assinaturas.administradoramutual.com.br/LOGO_ALPHA.png';
             const logoAlt = isMMB ? 'GRUPO MMB' : 'ALPHA PROTEÇÕES';
-            const sloganLine = isMMB ? `<div style="font-size: 11px; color: #333; font-style: italic; margin-top: 8px;">Mobilidade • Multiproteção • Benefícios</div>` : '';
+            const sloganLine = isMMB ? `<div style="font-size: 11px; color: #999; font-style: italic; margin-top: 8px;">Mobilidade • Multiproteção • Benefícios</div>` : '';
             const telefoneLine = telefone ? `<div style="font-size: 13px; color: #555; margin-bottom: 6px;">☎ ${telefone}</div>` : '';
             
             let htmlCode;
@@ -565,13 +565,26 @@
         }
         
         function downloadPNG(company) {
+            // Detectar zoom do navegador
+            const zoomLevel = Math.round(window.devicePixelRatio * 100);
+            
+            if (zoomLevel !== 100) {
+                alert(
+                    `⚠️ ATENÇÃO: Seu navegador está com zoom em ${zoomLevel}%.\n\n` +
+                    `Para gerar uma imagem com dimensões corretas para o Gmail, ` +
+                    `é necessário resetar o zoom para 100%.\n\n` +
+                    `Pressione Ctrl+0 (zero) para resetar o zoom e tente novamente.`
+                );
+                return;
+            }
+            
             const signature = document.getElementById(`${company}-signature`);
             const nome = document.getElementById(`${company}-nome`).value || 'assinatura';
             const fileName = `${nome.replace(/\s+/g, '_')}_${company}.png`;
             
             html2canvas(signature, {
                 backgroundColor: '#ffffff',
-                scale: 2,
+                scale: 1,
                 logging: false,
                 useCORS: true,
                 allowTaint: true
