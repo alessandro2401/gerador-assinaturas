@@ -421,6 +421,120 @@
             color: #555;
             line-height: 1.6;
         }
+        
+        /* Estilos do Card de Confidencialidade */
+        .rodape-card.confidencialidade {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #00203f;
+        }
+        
+        .rodape-card.confidencialidade h3 {
+            color: #00203f;
+        }
+        
+        .rodape-card.confidencialidade > p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .btn-toggle-confidencialidade {
+            padding: 12px 24px;
+            background: #00203f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-toggle-confidencialidade:hover {
+            background: #003366;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,32,63,0.3);
+        }
+        
+        #confidencialidade-content {
+            margin-top: 20px;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            background: #e9ecef;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+        
+        .tab-btn.active {
+            background: #00203f;
+            color: white;
+            border-color: #00203f;
+        }
+        
+        .tab-btn:hover:not(.active) {
+            background: #dee2e6;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .texto-confidencialidade {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            line-height: 1.7;
+            color: #333;
+        }
+        
+        .texto-confidencialidade h4 {
+            color: #00203f;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+        
+        .texto-confidencialidade p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+        
+        .btn-copiar-texto {
+            padding: 12px 24px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .btn-copiar-texto:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40,167,69,0.3);
+        }
     </style>
 </head>
 <body>
@@ -604,6 +718,50 @@
                 </button>
             </div>
             
+            <!-- TEXTO DE CONFIDENCIALIDADE -->
+            <div class="rodape-card confidencialidade">
+                <h3>📝 Texto de Confidencialidade</h3>
+                <p>Para uso em assinaturas de e-mail corporativas</p>
+                
+                <button class="btn-toggle-confidencialidade" onclick="toggleConfidencialidade()">
+                    <span id="toggle-icon">▼</span> <span id="toggle-text">Mostrar Texto</span>
+                </button>
+                
+                <div id="confidencialidade-content" style="display: none;">
+                    <!-- Abas PT/EN -->
+                    <div class="tabs">
+                        <button class="tab-btn active" onclick="showTab('pt')">🇧🇷 Português</button>
+                        <button class="tab-btn" onclick="showTab('en')">🇺🇸 English</button>
+                    </div>
+                    
+                    <!-- Conteúdo em Português -->
+                    <div id="tab-pt" class="tab-content active">
+                        <div class="texto-confidencialidade">
+                            <h4>Confidencialidade e Responsabilidade</h4>
+                            <p>Esta mensagem e seus anexos podem conter informações confidenciais e de uso restrito, destinadas exclusivamente ao(s) destinatário(s). O acesso, uso, cópia, divulgação ou distribuição não autorizados são proibidos e podem gerar responsabilidade civil, trabalhista, administrativa e penal, em conformidade com a Lei nº 13.709/2018 (LGPD), o Código Civil Brasileiro (Lei nº 10.406/2002) e demais normas aplicáveis.</p>
+                            <p>Se você recebeu esta mensagem por engano, solicitamos que informe imediatamente o remetente e a apague de seu sistema.</p>
+                            <p>Ressaltamos que comunicações eletrônicas podem estar sujeitas a intercepções, alterações ou falhas técnicas. Não assumimos responsabilidade por transmissões incompletas ou atrasadas, nem por danos decorrentes de vírus ou modificações não autorizadas. Apesar de utilizarmos controles de segurança alinhados às melhores práticas de mercado, não é possível garantir a integridade desta mensagem após o envio.</p>
+                        </div>
+                        <button class="btn-copiar-texto" onclick="copiarTexto('pt')">
+                            📋 Copiar Texto em Português
+                        </button>
+                    </div>
+                    
+                    <!-- Conteúdo em Inglês -->
+                    <div id="tab-en" class="tab-content">
+                        <div class="texto-confidencialidade">
+                            <h4>Confidentiality and Liability Notice</h4>
+                            <p>This message and its attachments may contain confidential and restricted information intended solely for the designated recipient(s). Unauthorized access, use, copying, disclosure, or distribution is prohibited and may result in civil, labor, administrative, and criminal liability, in accordance with Law No. 13.709/2018 (LGPD – Brazilian General Data Protection Law), the Brazilian Civil Code (Law No. 10.406/2002), and other applicable regulations.</p>
+                            <p>If you have received this message in error, please notify the sender immediately and delete it from your system.</p>
+                            <p>Please note that electronic communications may be subject to interception, alteration, or technical failures. We assume no liability for incomplete or delayed transmissions, nor for damages caused by viruses or unauthorized modifications. While we adopt security controls aligned with industry best practices, we cannot guarantee the integrity of this message after transmission.</p>
+                        </div>
+                        <button class="btn-copiar-texto" onclick="copiarTexto('en')">
+                            📋 Copy Text in English
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Informações sobre os rodapés -->
             <div class="rodape-info">
                 <strong>ℹ️ Sobre os Rodapés:</strong><br>
@@ -752,6 +910,54 @@
             link.download = rodapeName;
             link.click();
             alert('✅ Rodapé oficial baixado com sucesso!');
+        }
+        
+        function toggleConfidencialidade() {
+            const content = document.getElementById('confidencialidade-content');
+            const icon = document.getElementById('toggle-icon');
+            const text = document.getElementById('toggle-text');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                icon.textContent = '▲';
+                text.textContent = 'Ocultar Texto';
+            } else {
+                content.style.display = 'none';
+                icon.textContent = '▼';
+                text.textContent = 'Mostrar Texto';
+            }
+        }
+        
+        function showTab(lang) {
+            // Ocultar todas as abas
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Mostrar aba selecionada
+            document.getElementById(`tab-${lang}`).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function copiarTexto(lang) {
+            const textos = {
+                pt: `Confidencialidade e Responsabilidade\n\nEsta mensagem e seus anexos podem conter informações confidenciais e de uso restrito, destinadas exclusivamente ao(s) destinatário(s). O acesso, uso, cópia, divulgação ou distribuição não autorizados são proibidos e podem gerar responsabilidade civil, trabalhista, administrativa e penal, em conformidade com a Lei nº 13.709/2018 (LGPD), o Código Civil Brasileiro (Lei nº 10.406/2002) e demais normas aplicáveis.\n\nSe você recebeu esta mensagem por engano, solicitamos que informe imediatamente o remetente e a apague de seu sistema.\n\nRessaltamos que comunicações eletrônicas podem estar sujeitas a intercepções, alterações ou falhas técnicas. Não assumimos responsabilidade por transmissões incompletas ou atrasadas, nem por danos decorrentes de vírus ou modificações não autorizadas. Apesar de utilizarmos controles de segurança alinhados às melhores práticas de mercado, não é possível garantir a integridade desta mensagem após o envio.`,
+                
+                en: `Confidentiality and Liability Notice\n\nThis message and its attachments may contain confidential and restricted information intended solely for the designated recipient(s). Unauthorized access, use, copying, disclosure, or distribution is prohibited and may result in civil, labor, administrative, and criminal liability, in accordance with Law No. 13.709/2018 (LGPD – Brazilian General Data Protection Law), the Brazilian Civil Code (Law No. 10.406/2002), and other applicable regulations.\n\nIf you have received this message in error, please notify the sender immediately and delete it from your system.\n\nPlease note that electronic communications may be subject to interception, alteration, or technical failures. We assume no liability for incomplete or delayed transmissions, nor for damages caused by viruses or unauthorized modifications. While we adopt security controls aligned with industry best practices, we cannot guarantee the integrity of this message after transmission.`
+            };
+            
+            const texto = textos[lang];
+            
+            navigator.clipboard.writeText(texto).then(() => {
+                const langName = lang === 'pt' ? 'português' : 'inglês';
+                alert(`✅ Texto de confidencialidade em ${langName} copiado com sucesso!`);
+            }).catch(err => {
+                console.error('Erro ao copiar:', err);
+                alert('❌ Erro ao copiar o texto. Tente novamente.');
+            });
         }
         
         // Inicializar
