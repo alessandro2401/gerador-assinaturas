@@ -388,6 +388,7 @@
                 </div>
                 
                 <div class="buttons">
+                    <button class="btn mmb-primary" onclick="downloadPNG('mmb')">📥 Baixar PNG</button>
                     <button class="btn mmb-primary" onclick="copyHTML('mmb')">📋 Copiar HTML</button>
                 </div>
                 
@@ -461,6 +462,7 @@
                 </div>
                 
                 <div class="buttons">
+                    <button class="btn alpha-primary" onclick="downloadPNG('alpha')">📥 Baixar PNG</button>
                     <button class="btn alpha-primary" onclick="copyHTML('alpha')">📋 Copiar HTML</button>
                 </div>
                 
@@ -472,6 +474,7 @@
         </div>
     </div>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         // MMB Event Listeners
         document.getElementById('mmb-nome').addEventListener('input', () => updatePreview('mmb'));
@@ -559,6 +562,29 @@
             textarea.select();
             document.execCommand('copy');
             alert('✅ Código HTML copiado para a área de transferência!');
+        }
+        
+        function downloadPNG(company) {
+            const signature = document.getElementById(`${company}-signature`);
+            const nome = document.getElementById(`${company}-nome`).value || 'assinatura';
+            const fileName = `${nome.replace(/\s+/g, '_')}_${company}.png`;
+            
+            html2canvas(signature, {
+                backgroundColor: '#ffffff',
+                scale: 2,
+                logging: false,
+                useCORS: true,
+                allowTaint: true
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = fileName;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                alert('✅ Imagem PNG baixada com sucesso!');
+            }).catch(error => {
+                console.error('Erro ao gerar PNG:', error);
+                alert('❌ Erro ao gerar a imagem. Tente novamente.');
+            });
         }
         
         // Inicializar
